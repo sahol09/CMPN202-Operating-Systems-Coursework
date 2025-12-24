@@ -130,21 +130,21 @@ Key checks included:
 - Verifying memory and disk allocation  
 - Checking active network interfaces and assigned IP address  
 
-![System Information](../Screenshots/Week1/2_system_info.png)
+![System Information](../Screenshots/Week1/2_server_system_info.png)
 
 ---
 
-### SSH Service Verification
+## SSH Service Verification
 
-![SSH Service Running](../Screenshots/Week1/3_ssh_running.png)
+![SSH Service Status](../Screenshots/Week1/3_server_ssh_status.png)
 
 This screenshot confirms that the SSH service is **active and running**, enabling secure remote administration without reliance on the VirtualBox console.
 
 ---
 
-### SSH Network Port Verification
+## SSH Network Port Verification
 
-![SSH Port](../Screenshots/Week1/4_ssh_port.png)
+![SSH Port](../Screenshots/Week1/4_server_SSH_port.png)
 
 This screenshot confirms that the SSH service is listening on the correct network port, validating readiness for secure remote connectivity.
 
