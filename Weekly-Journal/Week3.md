@@ -41,16 +41,11 @@ Linux provides several built-in monitoring tools that allow administrators to ev
 
 The `ps aux` command was used to display a detailed list of running processes along with their CPU and memory usage.
 
-This provides visibility into:
-- Active system services
-- User processes
-- Resource consumption patterns
-
 ### Screenshot: Process List Output
 
-![Process List](../Screenshots/Week3/Week3_1_ps_aux.png)
+![Process List](../Screenshots/Week3/1_week3_ps_aux.png)
 
-This screenshot shows the list of active processes and demonstrates how system resources are distributed among background services and user applications.
+This output shows active system services and user processes and how resources are distributed across the system.
 
 ---
 
@@ -58,18 +53,13 @@ This screenshot shows the list of active processes and demonstrates how system r
 
 ### Purpose
 
-The `top` command provides a continuously updating overview of system performance, including:
-
-- CPU usage  
-- Memory consumption  
-- Load average  
-- Number of active and sleeping processes  
+The `top` command provides a continuously updating overview of system performance, including CPU usage, memory consumption, load average, and process states.
 
 ### Screenshot: `top` Output
 
-![Top Monitoring](../Screenshots/Week3/Week3_2_top.png)
+![Top Monitoring](../Screenshots/Week3/2_week3_top.png)
 
-The output confirms that CPU usage remained low during idle operation and that sufficient memory was available, indicating stable system performance.
+The display confirms that CPU usage remains low during idle operation and memory usage is stable.
 
 ---
 
@@ -77,58 +67,68 @@ The output confirms that CPU usage remained low during idle operation and that s
 
 ### Purpose
 
-`htop` was used as an advanced monitoring tool to provide a more visual and user-friendly representation of system performance.
-
-### Advantages of `htop`
-
-- Colour-coded CPU and memory usage  
-- Clear visual process hierarchy  
-- Improved readability of system metrics  
+`htop` was used as an advanced monitoring tool to provide improved visibility and usability.
 
 ### Screenshot: `htop` Interface
 
-![Htop Monitoring](../Screenshots/Week3/Week3_3_htop.png)
+![Htop Monitoring](../Screenshots/Week3/3_week3_htop.png)
 
-This screenshot demonstrates the enhanced visibility provided by `htop`, allowing faster identification of system activity and resource distribution.
+This interface allows faster identification of system activity and resource distribution.
 
 ---
 
-## 7. System Resource Summary
+## 7. Memory & Disk Usage Analysis
 
-During monitoring, the following observations were recorded:
+Memory and storage were analysed to ensure sufficient available resources.
+
+### Screenshot: Memory & Disk
+
+![Memory & Disk](../Screenshots/Week3/4_week3_free_df.png)
+
+This confirms the system has adequate memory and disk capacity for stable operation.
+
+---
+
+## 8. System Uptime & Load Evaluation
+
+The system’s uptime and load averages were examined to assess long-term stability.
+
+### Screenshot: Uptime & Load
+
+![Uptime & Load](../Screenshots/Week3/5_week3_uptime_load.png)
+
+These values confirm the system is operating efficiently with low workload pressure.
+
+---
+
+## 9. Performance Summary
 
 | Resource | Observation |
 |---------|------------|
 | CPU | Low utilisation during idle state |
 | Memory | Stable usage with sufficient free RAM |
-| Processes | Normal background services and user processes |
-| System Stability | Maintained throughout monitoring session |
-
-These results indicate that the system is operating efficiently under normal conditions.
-
----
-
-## 8. Key Learning Outcomes
-
-By completing this week's tasks, the following skills were developed:
-
-- Interpreting performance metrics  
-- Identifying resource-heavy processes  
-- Monitoring system health in real time  
-- Understanding the relationship between system load and stability  
-- Using multiple monitoring tools effectively  
+| Disk | Adequate available storage |
+| Load Average | Low, indicating healthy system |
+| Overall Stability | Maintained during testing |
 
 ---
 
-## 9. Reflection
+## 10. Key Learning Outcomes
 
-Week 3 demonstrated the importance of continuous performance monitoring in maintaining a healthy operating system.  
-Understanding how CPU, memory, and processes interact provides administrators with the insight required to prevent performance degradation and prepare systems for increased workloads.
+- Improved understanding of performance metrics  
+- Ability to monitor live system behaviour  
+- Identification of resource-heavy processes  
+- Evaluation of system stability and readiness  
 
-These monitoring techniques form a critical foundation for future optimisation, logging, and security configuration tasks.
+---
+
+## 11. Reflection
+
+Week 3 demonstrated that continuous performance monitoring is essential for maintaining system health and preventing degradation.  
+These tools provide administrators with the insight required to plan capacity, detect issues early, and prepare systems for increased workloads.
 
 ---
 
 ### 🔗 Navigation
 
-[Back to Index](index.md) | [Week 1](Week1.md) | [Week 2](Week2.md) | Week 3 | [Week 4](Week4.md) | [Week 5](Week5.md) | [Week 6](Week6.md) | [Week 7](Week7.md)
+[Back to Index](index.md) | [Week 1](Week1.md) | [Week 2](Week2.md) | **Week 3** | [Week 4](Week4.md) | [Week 5](Week5.md) | [Week 6](Week6.md) | [Week 7](Week7.md)
