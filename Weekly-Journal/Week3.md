@@ -1,13 +1,11 @@
-#  Week 3 – Performance Testing & Monitoring
+# Week 3 – Performance Testing & Monitoring (Phase 3)
 
 ---
 
 ## 1. Introduction
 
-Week 3 focused on evaluating the performance of the Linux server through real-time monitoring and detailed resource analysis.  
-Rather than configuring new services, the objective was to understand how the operating system behaves under normal conditions and how system resources such as CPU, memory, and storage are utilised.
-
-Performance testing is essential for detecting bottlenecks, ensuring stability, and preparing the system for future optimisation and security hardening.
+Week 3 focused on selecting representative workloads and evaluating the performance of the Linux server through controlled testing and real-time monitoring.  
+The objective was to establish a performance baseline that supports future optimisation and security hardening decisions.
 
 ---
 
@@ -15,173 +13,73 @@ Performance testing is essential for detecting bottlenecks, ensuring stability, 
 
 The objectives of Week 3 were:
 
-- Monitor real-time system performance  
-- Analyse CPU scheduling and memory behaviour  
-- Observe running processes and background services  
-- Examine disk utilisation and I/O activity  
-- Evaluate overall system stability  
+- Select applications representing different workload types  
+- Install and execute testing tools remotely via SSH  
+- Define expected resource behaviour  
+- Monitor CPU, memory, disk, and network performance  
 - Establish baseline performance metrics  
 
 ---
 
-## 3. Performance Monitoring Overview
+## 3. Application Selection Matrix
 
-System monitoring allows administrators to answer critical operational questions:
-
-- Is the system under heavy load?  
-- Which processes are consuming the most resources?  
-- Is the server operating within safe limits?  
-
-Linux provides powerful built-in tools that enable detailed performance analysis without additional software.
-
----
-
-## 4. Process Monitoring Using `ps`
-
-### Purpose
-
-The `ps aux` command was used to display a comprehensive list of running processes along with CPU usage, memory consumption, ownership, and execution states.
-
-### Screenshot: Process List Output
-
-![Process List](/Screenshots/Week3/1_week3_ps_aux.png)
-
-This output provides a baseline snapshot of system activity and resource distribution.
+| Workload Type     | Application / Tool | Justification |
+|------------------|------------------|-------------|
+| CPU-intensive    | stress-ng        | Simulates heavy computational load |
+| RAM-intensive    | stress-ng (vm)   | Generates sustained memory pressure |
+| Disk I/O-intensive | fio           | Measures storage throughput and latency |
+| Network-intensive | iperf3          | Simulates high network traffic |
+| Server workload  | openssh-server   | Represents continuous real-world server service |
 
 ---
 
-## 5. Real-Time System Monitoring Using `top`
+## 4. Installation Documentation (SSH-Based)
 
-### Purpose
+All applications were installed remotely via SSH.
 
-The `top` utility provides a continuously updating overview of CPU usage, memory consumption, load average, and process scheduling behaviour.
+```bash
+sudo apt update
+sudo apt install -y htop sysstat stress-ng fio iperf3
+sudo systemctl enable --now sysstat
+5. Expected Resource Profiles
+Application	CPU Usage	Memory Usage	Disk I/O	Network Activity
+stress-ng (CPU)	High	Low	Low	None
+stress-ng (VM)	Medium	High	Low	None
+fio	Medium	Low	High	None
+iperf3	Low–Medium	Low	None	High
+ssh service	Low	Low	Low	Low
+6. Monitoring Strategy
+Resource	Monitoring Tools	Purpose
+CPU	top, htop, uptime	Observe load and scheduling
+Memory	free -h, vmstat	Analyse memory pressure
+Disk	df -h, iostat	Measure storage behaviour
+Network	iperf3	Measure throughput
+Processes	ps aux	Identify resource-heavy tasks
+7. Process Monitoring Using ps
 
-### Screenshot: `top` Output
+8. Real-Time System Monitoring
 
-![Top Monitoring](/Screenshots/Week3/2_week3_top.png)
+9. Memory & Disk Usage
 
-The display confirms that CPU usage remains low during idle operation and memory usage is stable.
+10. Uptime & Load Evaluation
 
----
+11. Virtual Memory & CPU Scheduling
 
-## 6. Enhanced Monitoring Using `htop`
+12. Disk I/O Performance
 
-### Purpose
+13. Kernel & Hardware Context
 
-`htop` was used as an advanced monitoring tool offering improved visibility, colour-coded metrics, and interactive process control.
+14. Process Scheduling Policies
 
-### Screenshot: `htop` Interface
+15. Performance Summary
+Resource	Observation
+CPU	Stable with low idle load
+Memory	Adequate available memory
+Disk	Sufficient storage and throughput
+Disk I/O	No detected bottlenecks
+Network	Stable during tests
+Overall Stability	Maintained throughout testing
+16. Reflection
 
-![Htop Monitoring](/Screenshots/Week3/3_week3_htop.png)
-
-This interface allows faster identification of system activity and performance trends.
-
----
-
-## 7. Memory & Disk Usage Analysis
-
-The commands `free -h` and `df -h` were executed to evaluate RAM allocation, swap usage, and disk space consumption.
-
-### Screenshot: Memory & Disk
-
-![Memory & Disk](/Screenshots/Week3/4_week3_free_df.png)
-
-This confirms the system has sufficient memory and storage resources for stable operation.
-
----
-
-## 8. System Uptime & Load Evaluation
-
-System uptime and load averages were analysed to assess long-term stability and CPU workload trends.
-
-### Screenshot: Uptime & Load
-
-![Uptime & Load](/Screenshots/Week3/5_week3_uptime_load.png)
-
-These values confirm the system is operating efficiently with minimal workload pressure.
-
----
-
-## 9. Virtual Memory & CPU Scheduling Analysis
-
-The command `vmstat 1 5` was used to inspect context switching, paging behaviour, I/O wait time, and CPU idle activity.
-
-### Screenshot: Virtual Memory & Scheduling
-
-![VMStat](/Screenshots/Week3/6_week3_vmstat.png)
-
-This provides deeper insight into kernel-level scheduling and memory management behaviour.
-
----
-
-## 10. Disk I/O Performance Analysis
-
-The `iostat` command was used to evaluate disk throughput, latency, and device utilisation.
-
-### Screenshot: Disk I/O Statistics
-
-![IOStat](/Screenshots/Week3/7_week3_iostat.png)
-
-
-This confirms efficient disk performance and absence of I/O bottlenecks.
-
----
-
-## 11. Kernel & Hardware Context
-
-System and hardware characteristics were recorded using `uname -a`, `lscpu`, and `lsmem` to link OS behaviour with physical resources.
-
-### Screenshot: Kernel & Hardware Information
-
-![Kernel & Hardware](/Screenshots/Week3/8_week3_kernel_hardware.png)
-
-This establishes the environment in which all performance measurements were observed.
-
----
-
-## 12. Process Scheduling Policy Inspection
-
-Linux scheduling policies and priorities were analysed using  
-`ps -eo pid,ppid,cmd,pri,ni,cls,stat`.
-
-### Screenshot: Scheduling Policies
-
-![Scheduling](/Screenshots/Week3/9_week3_process_scheduling.png)
-
-This confirms balanced scheduling and appropriate priority assignment by the kernel.
-
----
-
-## 13. Performance Summary
-
-| Resource | Observation |
-|---------|------------|
-| CPU | Low utilisation during idle operation |
-| Memory | Stable usage with sufficient free RAM |
-| Disk | Adequate available storage |
-| Disk I/O | Efficient throughput with no detected bottlenecks |
-| Load Average | Low, indicating healthy system |
-| Overall Stability | Maintained throughout testing |
-
----
-
-## 14. Key Learning Outcomes
-
-- Improved understanding of Linux performance metrics  
-- Ability to monitor and interpret live system behaviour  
-- Identification of resource-intensive processes  
-- Analysis of CPU scheduling and memory management  
-- Evaluation of overall system health and stability  
-
----
-
-## 15. Reflection
-
-This week demonstrated the importance of continuous performance monitoring in maintaining a stable and reliable operating environment.  
-The collected metrics provide a strong baseline for future optimisation, security hardening, and capacity planning.
-
----
-
-### 🔗 Navigation
-
-[Back to Index](index.md) | [Week 1](Week1.md) | [Week 2](Week2.md) | **Week 3** | [Week 4](Week4.md) | [Week 5](Week5.md) | [Week 6](Week6.md) | [Week 7](Week7.md)
+This phase established a structured performance testing methodology by combining workload selection, controlled testing, and comprehensive monitoring.
+The collected results form a reliable baseline for future system optimisation and security evaluation.
