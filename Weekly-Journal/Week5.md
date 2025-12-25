@@ -33,225 +33,146 @@ The objectives for Week 5 are:
 
 Before applying advanced security controls, existing users and groups are listed as baseline evidence.
 
-### Screenshot Evidence
+### Evidence
 
-- **Existing Users:** `1_week5_existing_users.png`  
-- **Existing Groups:** `2_week5_existing_groups.png`  
+- **Existing Users:**  
+  ![Existing Users](./Screenshots/Week5/1_week5_existing_users.png)
 
-This establishes the system state before introducing additional security controls.
+- **Existing Groups:**  
+  ![Existing Groups](./Screenshots/Week5/2_week5_existing_groups.png)
 
 ---
 
 ## 4. Account & Group Access Control (Role-Based)
 
-A controlled permission model is created using a test user and a dedicated access group, demonstrating **authorisation through group membership**.
+A controlled permission model is created using a test user and a dedicated access group.
 
 ### Evidence
 
-- **User created:** `3_week5_user_created.png`  
-- **Group created:** `4_week5_group_created.png`  
-- **User added to group:** `5_week5_user_added_to_group.png`  
-- **Membership verified:** `6_week5_user_group_verify.png`  
+- **User created:**  
+  ![User Created](./Screenshots/Week5/3_week5_user_created.png)
+
+- **Group created:**  
+  ![Group Created](./Screenshots/Week5/4_week5_group_created.png)
+
+- **User added to group:**  
+  ![User Added](./Screenshots/Week5/5_week5_user_added_to_group.png)
+
+- **Membership verified:**  
+  ![Group Verified](./Screenshots/Week5/6_week5_user_group_verify.png)
 
 ---
 
 ## 5. Secure Directory & Permission Enforcement
 
-A protected directory is created with the following controls:
+A protected directory is created with:
 
 - Owner: root  
 - Group: secure group  
-- Permissions: `770` (owner and group only)
+- Permissions: `770`  
 
 ### Evidence
 
-- **Secure directory configured:** `7_week5_secure_directory.png`  
-- **Authorised access success:** `8_week5_secure_access_success.png`  
-- **Unauthorised access denied:** `9_week5_permission_denied.png`  
+- **Secure directory configured:**  
+  ![Secure Directory](./Screenshots/Week5/7_week5_secure_directory.png)
 
-This demonstrates enforcement of access control boundaries.
+- **Authorised access success:**  
+  ![Access Allowed](./Screenshots/Week5/8_week5_secure_access_success.png)
+
+- **Unauthorised access denied:**  
+  ![Access Denied](./Screenshots/Week5/9_week5_permission_denied.png)
 
 ---
 
 ## 6. Cleanup (System Restoration)
 
-All temporary accounts, groups, and directories are removed to restore the baseline state.
+Temporary accounts, groups, and directories are removed to restore the baseline state.
 
 ### Evidence
 
-- **Cleanup completed:** `10_week5_cleanup.png`  
+- **Cleanup completed:**  
+  ![Cleanup](./Screenshots/Week5/10_week5_cleanup.png)
 
 ---
 
 ## 7. Mandatory Access Control (MAC) – AppArmor
 
-Ubuntu uses **AppArmor** as its Mandatory Access Control framework.  
-AppArmor enforces **policy-based restrictions** on processes, even when traditional file permissions allow access.
-
-### Verification & Reporting
-
-The AppArmor service status and active profiles are checked using built-in tools.
+AppArmor enforces policy-based restrictions on processes.
 
 ### Evidence
 
-- **AppArmor status check:** `11_week5_apparmor_status.png`  
-- **AppArmor enabled evidence:** `12_week5_apparmor_enabled.png`  
+- **AppArmor status:**  
+  ![AppArmor Status](./Screenshots/Week5/11_week5_apparmor_status.png)
+
+- **AppArmor enabled:**  
+  ![AppArmor Enabled](./Screenshots/Week5/12_week5_apparmor_enabled.png)
 
 ---
 
-## 8. Automatic Security Updates (unattended-upgrades)
-
-Automatic security updates are configured to ensure the server continuously receives security patches without manual intervention, reducing exposure to known vulnerabilities.
+## 8. Automatic Security Updates
 
 ### Evidence
 
-- **unattended-upgrades status:** `13_week5_unattended_upgrades_status.png`  
-- **Configuration evidence:** `14_week5_auto_upgrades_config.png`  
+- **unattended-upgrades status:**  
+  ![Auto Updates](./Screenshots/Week5/13_week5_unattended_upgrades_status.png)
+
+- **Configuration:**  
+  ![Auto Config](./Screenshots/Week5/14_week5_auto_upgrades_config.png)
 
 ---
 
-## 9. Intrusion Detection / Brute-Force Protection – fail2ban
-
-fail2ban is installed and configured to protect the SSH service by detecting repeated failed login attempts and banning malicious IP addresses.
+## 9. Intrusion Protection – fail2ban
 
 ### Evidence
 
-- **fail2ban service status:** `15_week5_fail2ban_status.png`  
-- **fail2ban SSH configuration:** `16_week5_fail2ban_sshd.png`  
+- **fail2ban status:**  
+  ![fail2ban Status](./Screenshots/Week5/15_week5_fail2ban_status.png)
+
+- **SSH protection active:**  
+  ![fail2ban SSH](./Screenshots/Week5/16_week5_fail2ban_sshd.png)
 
 ---
 
-## 10. security-baseline.sh Script (Server-side Baseline Verification)
-
-A security baseline verification script is created and executed on the server to validate core Phase 4 and Phase 5 security controls:
-
-- SSH service state  
-- Firewall status (UFW)  
-- fail2ban service state  
-- unattended-upgrades service state  
-- AppArmor service state  
-- User account listing  
+## 10. security-baseline.sh Script
 
 ### Evidence
 
-- **Script created:** `17_week5_baseline_script_created.png`  
-- **Script execution output:** `18_week5_baseline_script.png`  
-- **Report saved on server:** `19_week5_baseline_script_run_and_saved.png`  
-- **Saved report preview:** `20_week5_baseline_report_output.png`  
+- **Script created:**  
+  ![Script Created](./Screenshots/Week5/17_week5_baseline_script_created.png)
+
+- **Script executed:**  
+  ![Script Output](./Screenshots/Week5/18_week5_baseline_script.png)
+
+- **Report saved:**  
+  ![Saved Report](./Screenshots/Week5/19_week5_baseline_script_run_and_saved.png)
+
+- **Report preview:**  
+  ![Report Preview](./Screenshots/Week5/20_week5_baseline_report_output.png)
 
 ---
 
-## 11. Monitoring Output Evidence (Server-Side Monitoring)
-
-All monitoring data is collected **and stored on the server itself**.  
-No external workstation is used for live monitoring during this phase.
+## 11. Monitoring Output (Server-side)
 
 ### Evidence
 
-- **Monitoring logs and status evidence:** `21_week5_ssh_status_and_logs.png`  
-- **Security controls status snapshots:**  
-  - `22_week5_controls_status_1.png`  
-  - `23_week5_controls_status_2.png`  
-- **Monitor report preview:** `24_week5_monitor_report_preview.png`  
+- **Logs & status:**  
+  ![Logs](./Screenshots/Week5/21_week5_ssh_status_and_logs.png)
+
+- **Controls status:**  
+  ![Controls 1](./Screenshots/Week5/22_week5_controls_status_1.png)
+
+- **Controls status:**  
+  ![Controls 2](./Screenshots/Week5/23_week5_controls_status_2.png)
+
+- **Monitor report preview:**  
+  ![Monitor Preview](./Screenshots/Week5/24_week5_monitor_report_preview.png)
 
 ---
 
-## 12. Security Summary Table
+## 12. Reflection
 
-| Control             | Evidence                    | Outcome                       |
-|-------------------|-----------------------------|-------------------------------|
-| Baseline Users      | 1_week5_existing_users.png  | Baseline captured             |
-| Baseline Groups     | 2_week5_existing_groups.png | Baseline captured             |
-| RBAC User/Group     | 3–6 screenshots             | Controlled authorisation      |
-| Secure Directory    | 7 screenshot                | Enforced least privilege      |
-| Allowed access test | 8 screenshot                | Authorised success            |
-| Denied access test  | 9 screenshot                | Unauthorised blocked          |
-| Cleanup             | 10 screenshot               | Returned to baseline          |
-| AppArmor MAC        | 11–12 screenshots           | Verified enabled              |
-| Auto Updates        | 13–14 screenshots           | Configured and verified       |
-| fail2ban            | 15–16 screenshots           | SSH protection active         |
-| Baseline Script     | 17–20 screenshots           | Verification automation       |
-| Monitoring Output   | 21–24 screenshots           | Security & performance record |
-
----
-
-## 13. Final Scripts (Appendix)
-
-### A) `security-baseline.sh` (RUN ON SERVER)
-
-~~~bash
-#!/bin/bash
-# security-baseline.sh
-# Purpose: Quick verification of Phase 4 + Phase 5 security controls.
-# Output: Displays and optionally saves a baseline report.
-
-echo "===== SECURITY BASELINE CHECK ====="
-echo "Date: $(date)"
-echo
-
-echo "[1] SSH Service"
-systemctl is-active ssh
-echo
-
-echo "[2] Firewall (UFW) Status"
-ufw status
-echo
-
-echo "[3] fail2ban Status"
-systemctl is-active fail2ban
-echo
-
-echo "[4] Automatic Updates (unattended-upgrades)"
-systemctl is-active unattended-upgrades
-echo
-
-echo "[5] AppArmor Status"
-systemctl is-active apparmor
-echo
-
-echo "[6] User Accounts (basic list)"
-cut -d: -f1 /etc/passwd
-echo
-
-echo "===== END OF REPORT ====="
-~~~
-
-**Saved on the server using:**
-
-~~~bash
-sudo bash ./security-baseline.sh | tee baseline-report.txt
-~~~
-
----
-
-### B) Monitoring Plan (Server-Side)
-
-All monitoring tasks are executed **directly on the server**, and results are written to `monitor-report.txt`.
-
-#### Metrics Collected
-
-- CPU load and uptime  
-- Memory usage  
-- Disk usage  
-- Active user sessions  
-- Key service states (ssh, ufw, fail2ban, unattended-upgrades, apparmor)  
-
-#### Monitoring Schedule
-
-- During major configuration changes  
-- After security updates  
-- At regular administrative checkpoints  
-
-#### Output
-
-All results are timestamped and appended to `monitor-report.txt` on the server.
-
----
-
-## 14. Reflection
-
-Week 5 significantly strengthens the server’s security posture by enforcing **Mandatory Access Control**, automating patch management, and deploying **fail2ban** for intrusion protection.  
-The baseline and monitoring scripts provide consistent, auditable verification of the system’s security state.
+Week 5 strengthens the server’s security posture through MAC enforcement, automated patching, and intrusion protection.  
+Baseline and monitoring scripts provide consistent verification and audit-ready evidence.
 
 ---
 
