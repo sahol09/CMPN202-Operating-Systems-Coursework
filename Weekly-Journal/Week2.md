@@ -1,4 +1,4 @@
-# 📘 Week 2 – Security Configuration & Remote Administration
+#  Week 2 – Security Configuration & Remote Administration
 
 ---
 
