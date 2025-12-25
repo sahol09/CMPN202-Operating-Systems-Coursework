@@ -1,4 +1,4 @@
-# 📊 Week 3 – Performance Testing & Monitoring
+#  Week 3 – Performance Testing & Monitoring
 
 ---
 
