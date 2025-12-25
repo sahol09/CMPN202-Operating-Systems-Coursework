@@ -150,7 +150,7 @@ To demonstrate secure administration and confirm active sessions, the logged-in 
 
 ### Screenshot: Remote Session Check
 
-![Remote Session](../Screenshots/Week4/11_week4_remote_session.png)
+![Remote Session](/Screenshots/Week4/11_week4_remote_session.png)
 
 This supports the coursework requirement for controlled and auditable administration activity.
 
