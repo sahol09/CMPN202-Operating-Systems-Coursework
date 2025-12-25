@@ -1,189 +1,260 @@
-#  Week 5 – User Management & Access Control
+# Week 5 – Advanced Security & Monitoring (Access Control, Updates, Fail2ban, Baseline & Monitoring Scripts)
 
 ---
 
 ## 1. Introduction
 
-Week 5 focused on implementing operating system access control using Linux user accounts, groups, and permission enforcement.  
-These mechanisms represent the core security model of Unix-like systems and provide practical examples of authentication (who the user is), authorisation (what they are allowed to do), and access control (how permissions are enforced on resources).
+Week 5 implements **advanced security controls** and **monitoring capability** on the Ubuntu Server.  
+This week focuses on improving the security posture through:
 
-This week’s work demonstrates a complete administrative workflow: establishing a baseline, applying changes, validating authorised access, proving unauthorised denial, and restoring the system state through clean-up.
+- **Mandatory Access Control (MAC)** using **AppArmor**
+- **Automatic security updates** using unattended-upgrades
+- **Intrusion protection** using fail2ban (SSH hardening)
+- **Security baseline verification script** (executed on the server)
+- **Monitoring output and metrics collection** (stored on the server)
 
----
-
-## 2. Objectives for This Week
-
-The objectives of Week 5 were:
-
-- Inspect existing users and groups to create a baseline  
-- Create a new user account for controlled permission testing  
-- Create a dedicated security group for group-based access control  
-- Assign users to groups to model role-based access  
-- Create a protected directory with least-privilege permissions  
-- Validate authorised access using an in-group user  
-- Validate access denial using an out-of-group user  
-- Remove test users/groups and clean up created resources  
+All tasks are executed using terminal-based administration on the server and are evidenced through screenshots.
 
 ---
 
-## 3. Baseline User Inspection
+## 2. Objectives
 
-Before introducing new test accounts, existing users were listed to document the system’s current authentication environment and establish a baseline state.
+The objectives for Week 5 are:
 
-### Screenshot: Existing Users
-
-![Existing Users](/Screenshots/Week5/1_week5_existing_users.png)
-
-This baseline supports traceability by showing what accounts existed before changes were made.
-
----
-
-## 4. Baseline Group Inspection
-
-Groups were inspected to document how the system organises access control roles and administrative permissions.
-
-### Screenshot: Existing Groups
-
-![Existing Groups](/Screenshots/Week5/2_week5_existing_groups.png)
-
-This establishes the pre-change group structure before new access control roles were introduced.
+1. Implement Access Control using **AppArmor** and document how to check and report its status  
+2. Configure **automatic security updates**  
+3. Install and configure **fail2ban** for SSH intrusion protection  
+4. Create and execute **security-baseline.sh** on the server  
+5. Generate monitoring output files on the server and define a monitoring plan  
 
 ---
 
-## 5. User Creation
+## 3. Baseline: Users and Groups (Initial State)
 
-A new user account was created for access testing. This user represents a legitimate account that can be granted permissions through group membership.
+Before applying advanced security controls, existing users and groups are listed as baseline evidence.
 
-### Screenshot: User Created
+### Screenshot Evidence
 
-![User Created](/Screenshots/Week5/3_week5_user_created.png)
+- **Existing Users:** `1_week5_existing_users.png`  
+- **Existing Groups:** `2_week5_existing_groups.png`  
 
----
-
-## 6. Group Creation
-
-A dedicated group was created to represent an access control role. This allows permissions to be assigned at the group level, supporting scalable administration.
-
-### Screenshot: Group Created
-
-![Group Created](/Screenshots/Week5/4_week5_group_created.png)
+This establishes the system state before introducing additional security controls.
 
 ---
 
-## 7. Adding the User to the Security Group
+## 4. Account & Group Access Control (Role-Based)
 
-The test user was added to the security group, enabling group-based authorisation.  
-This step demonstrates how Linux groups are used to assign access rights without changing ownership per-user.
+A controlled permission model is created using a test user and a dedicated access group, demonstrating **authorisation through group membership**.
 
-### Screenshot: User Added to Group
+### Evidence
 
-![User Added to Group](/Screenshots/Week5/5_week5_user_added_to_group.png)
-
----
-
-## 8. Verification of User Group Membership
-
-The user’s identity and group memberships were verified to ensure the authorisation change took effect correctly.
-
-### Screenshot: Group Membership Verified
-
-![Group Verify](/Screenshots/Week5/6_week5_user_group_verify.png)
-
-This confirms that the user is correctly associated with the intended group role.
+- **User created:** `3_week5_user_created.png`  
+- **Group created:** `4_week5_group_created.png`  
+- **User added to group:** `5_week5_user_added_to_group.png`  
+- **Membership verified:** `6_week5_user_group_verify.png`  
 
 ---
 
-## 9. Secure Directory Creation and Permission Enforcement
+## 5. Secure Directory & Permission Enforcement
 
-A protected directory was created and configured so that:
+A protected directory is created with the following controls:
 
-- `root` retains administrative ownership  
-- the directory group controls authorised access  
-- permissions allow access only to owner and group (770)  
+- Owner: root  
+- Group: secure group  
+- Permissions: `770` (owner and group only)
 
-This enforces least privilege by blocking all other users.
+### Evidence
 
-### Screenshot: Secure Directory Configuration
+- **Secure directory configured:** `7_week5_secure_directory.png`  
+- **Authorised access success:** `8_week5_secure_access_success.png`  
+- **Unauthorised access denied:** `9_week5_permission_denied.png`  
 
-![Secure Directory](/Screenshots/Week5/7_week5_secure_directory.png)
-
-This configuration implements a practical access control boundary on the filesystem.
-
----
-
-## 10. Authorised Access Test (Allowed)
-
-The group member user was tested to confirm authorised access works as intended.  
-Successful access and file creation verifies the permission model is correctly applied.
-
-### Screenshot: Secure Access Success
-
-![Access Success](/Screenshots/Week5/8_week5_secure_access_success.png)
-
-This demonstrates that access is granted only to authorised users under the defined policy.
+This demonstrates enforcement of access control boundaries.
 
 ---
 
-## 11. Unauthorised Access Test (Denied)
+## 6. Cleanup (System Restoration)
 
-An additional user (not a member of the security group) attempted access to the protected directory.  
-The expected result is permission denial, demonstrating enforcement of access control and prevention of unauthorised operations.
+All temporary accounts, groups, and directories are removed to restore the baseline state.
 
-### Screenshot: Permission Denied
+### Evidence
 
-![Permission Denied](/Screenshots/Week5/9_week5_permission_denied.png)
-
-This is critical evidence that the security boundary is effective.
+- **Cleanup completed:** `10_week5_cleanup.png`  
 
 ---
 
-## 12. Cleanup and System Restoration
+## 7. Mandatory Access Control (MAC) – AppArmor
 
-All test accounts, groups, and created directories were removed to restore the system to a clean baseline state.  
-This demonstrates professional administration practices and prevents test artefacts remaining on the server.
+Ubuntu uses **AppArmor** as its Mandatory Access Control framework.  
+AppArmor enforces **policy-based restrictions** on processes, even when traditional file permissions allow access.
 
-### Screenshot: Cleanup Completed
+### Verification & Reporting
 
-![Cleanup](/Screenshots/Week5/10_week5_cleanup.png)
+The AppArmor service status and active profiles are checked using built-in tools.
 
----
+### Evidence
 
-## 13. Security Summary
-
-| Control Implemented | Evidence | Outcome |
-|--------------------|----------|---------|
-| Baseline user listing | Screenshot 1 | Documented authentication environment |
-| Baseline group listing | Screenshot 2 | Documented authorisation roles |
-| User creation | Screenshot 3 | Test identity created |
-| Group creation | Screenshot 4 | Role-based access group created |
-| Group assignment | Screenshot 5 | Authorisation applied through membership |
-| Membership verification | Screenshot 6 | Access role confirmed |
-| Protected directory | Screenshot 7 | Permission boundary created |
-| Authorised access test | Screenshot 8 | Access permitted for authorised user |
-| Unauthorised access test | Screenshot 9 | Access blocked for unauthorised user |
-| Cleanup | Screenshot 10 | System returned to baseline |
+- **AppArmor status check:** `11_week5_apparmor_status.png`  
+- **AppArmor enabled evidence:** `12_week5_apparmor_enabled.png`  
 
 ---
 
-## 14. Key Learning Outcomes
+## 8. Automatic Security Updates (unattended-upgrades)
 
-- Understanding how Linux uses users and groups to control access  
-- Implementation of group-based authorisation in a scalable way  
-- Correct use of ownership (`chown`) and permission bits (`chmod`)  
-- Practical validation of both access grant and access denial  
-- Application of least privilege and secure administration workflow  
+Automatic security updates are configured to ensure the server continuously receives security patches without manual intervention, reducing exposure to known vulnerabilities.
 
----
+### Evidence
 
-## 15. Reflection
-
-Week 5 demonstrated that operating system security is largely enforced through identity and permissions.  
-By creating a role-based access group, restricting a directory, and validating behaviour with authorised and unauthorised users, the system’s access control model was tested in a controlled and evidence-based way.
-
-This workflow mirrors professional administration practice by combining baseline auditing, controlled configuration changes, validation testing, and full cleanup to preserve system integrity.
+- **unattended-upgrades status:** `13_week5_unattended_upgrades_status.png`  
+- **Configuration evidence:** `14_week5_auto_upgrades_config.png`  
 
 ---
 
-### 🔗 Navigation
+## 9. Intrusion Detection / Brute-Force Protection – fail2ban
 
-[Back to Index](index.md) | [Week 1](Week1.md) | [Week 2](Week2.md) | [Week 3](Week3.md) | [Week 4](Week4.md) | **Week 5** | [Week 6](Week6.md) | [Week 7](Week7.md)
+fail2ban is installed and configured to protect the SSH service by detecting repeated failed login attempts and banning malicious IP addresses.
+
+### Evidence
+
+- **fail2ban service status:** `15_week5_fail2ban_status.png`  
+- **fail2ban SSH configuration:** `16_week5_fail2ban_sshd.png`  
+
+---
+
+## 10. security-baseline.sh Script (Server-side Baseline Verification)
+
+A security baseline verification script is created and executed on the server to validate core Phase 4 and Phase 5 security controls:
+
+- SSH service state  
+- Firewall status (UFW)  
+- fail2ban service state  
+- unattended-upgrades service state  
+- AppArmor service state  
+- User account listing  
+
+### Evidence
+
+- **Script created:** `17_week5_baseline_script_created.png`  
+- **Script execution output:** `18_week5_baseline_script.png`  
+- **Report saved on server:** `19_week5_baseline_script_run_and_saved.png`  
+- **Saved report preview:** `20_week5_baseline_report_output.png`  
+
+---
+
+## 11. Monitoring Output Evidence (Server-Side Monitoring)
+
+All monitoring data is collected **and stored on the server itself**.  
+No external workstation is used for live monitoring during this phase.
+
+### Evidence
+
+- **Monitoring logs and status evidence:** `21_week5_ssh_status_and_logs.png`  
+- **Security controls status snapshots:**  
+  - `22_week5_controls_status_1.png`  
+  - `23_week5_controls_status_2.png`  
+- **Monitor report preview:** `24_week5_monitor_report_preview.png`  
+
+---
+
+## 12. Security Summary Table
+
+| Control             | Evidence                    | Outcome                       |
+|-------------------|-----------------------------|-------------------------------|
+| Baseline Users      | 1_week5_existing_users.png  | Baseline captured             |
+| Baseline Groups     | 2_week5_existing_groups.png | Baseline captured             |
+| RBAC User/Group     | 3–6 screenshots             | Controlled authorisation      |
+| Secure Directory    | 7 screenshot                | Enforced least privilege      |
+| Allowed access test | 8 screenshot                | Authorised success            |
+| Denied access test  | 9 screenshot                | Unauthorised blocked          |
+| Cleanup             | 10 screenshot               | Returned to baseline          |
+| AppArmor MAC        | 11–12 screenshots           | Verified enabled              |
+| Auto Updates        | 13–14 screenshots           | Configured and verified       |
+| fail2ban            | 15–16 screenshots           | SSH protection active         |
+| Baseline Script     | 17–20 screenshots           | Verification automation       |
+| Monitoring Output   | 21–24 screenshots           | Security & performance record |
+
+---
+
+## 13. Final Scripts (Appendix)
+
+### A) `security-baseline.sh` (RUN ON SERVER)
+
+~~~bash
+#!/bin/bash
+# security-baseline.sh
+# Purpose: Quick verification of Phase 4 + Phase 5 security controls.
+# Output: Displays and optionally saves a baseline report.
+
+echo "===== SECURITY BASELINE CHECK ====="
+echo "Date: $(date)"
+echo
+
+echo "[1] SSH Service"
+systemctl is-active ssh
+echo
+
+echo "[2] Firewall (UFW) Status"
+ufw status
+echo
+
+echo "[3] fail2ban Status"
+systemctl is-active fail2ban
+echo
+
+echo "[4] Automatic Updates (unattended-upgrades)"
+systemctl is-active unattended-upgrades
+echo
+
+echo "[5] AppArmor Status"
+systemctl is-active apparmor
+echo
+
+echo "[6] User Accounts (basic list)"
+cut -d: -f1 /etc/passwd
+echo
+
+echo "===== END OF REPORT ====="
+~~~
+
+**Saved on the server using:**
+
+~~~bash
+sudo bash ./security-baseline.sh | tee baseline-report.txt
+~~~
+
+---
+
+### B) Monitoring Plan (Server-Side)
+
+All monitoring tasks are executed **directly on the server**, and results are written to `monitor-report.txt`.
+
+#### Metrics Collected
+
+- CPU load and uptime  
+- Memory usage  
+- Disk usage  
+- Active user sessions  
+- Key service states (ssh, ufw, fail2ban, unattended-upgrades, apparmor)  
+
+#### Monitoring Schedule
+
+- During major configuration changes  
+- After security updates  
+- At regular administrative checkpoints  
+
+#### Output
+
+All results are timestamped and appended to `monitor-report.txt` on the server.
+
+---
+
+## 14. Reflection
+
+Week 5 significantly strengthens the server’s security posture by enforcing **Mandatory Access Control**, automating patch management, and deploying **fail2ban** for intrusion protection.  
+The baseline and monitoring scripts provide consistent, auditable verification of the system’s security state.
+
+---
+
+### Navigation
+
+[Back to Index](index.md) | [Week 1](Week1.md) | [Week 2](Week2.md) | [Week 3](Week3.md) | [Week 4](Week4.md) | Week 5 | [Week 6](Week6.md) | [Week 7](Week7.md)
