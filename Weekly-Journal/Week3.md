@@ -120,7 +120,7 @@ The `iostat` command was used to evaluate disk throughput, latency, and device u
 
 ### Screenshot: Disk I/O Statistics
 
-![IOStat](../Screenshots/Week3/7_week3_iostat.png)
+[IOStat](../Screenshots/Week3/7_week3_iostat.png)
 
 This confirms efficient disk performance and absence of I/O bottlenecks.
 
