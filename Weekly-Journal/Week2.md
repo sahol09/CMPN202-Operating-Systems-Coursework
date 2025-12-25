@@ -1,143 +1,158 @@
-#  Week 2 – Security Configuration & Remote Administration
+# Week 2 – Security Configuration, Remote Administration & Testing Methodology
 
 ---
 
 ## 1. Introduction
 
-Week 2 focused on implementing secure remote administration and establishing a strong operating system security baseline.  
-The primary objective was to configure **secure SSH access**, validate network readiness, and demonstrate **file permission and ownership enforcement** using Linux access control mechanisms.
-
-These tasks replicate real-world server administration where systems must remain remotely accessible while strictly controlling user privileges.
+Week 2 focused on implementing secure remote administration while formally designing a security baseline and performance testing methodology for the server environment.  
+The primary objective was to configure **secure SSH access**, validate network readiness, enforce **file permissions and ownership**, and establish structured security and monitoring practices.
 
 ---
 
 ## 2. Objectives for This Week
 
-The main objectives of Week 2 were:
-
-- Enable secure remote administration
-- Verify SSH service availability
-- Confirm correct network configuration
-- Implement file permission and ownership controls
-- Demonstrate user privilege separation
-- Define a strong security baseline for future hardening
+- Enable secure remote administration  
+- Verify SSH service availability  
+- Confirm correct network configuration  
+- Implement file permission and ownership controls  
+- Demonstrate user privilege separation  
+- Define a security baseline and performance testing methodology  
 
 ---
 
-## 3. Remote Administration Overview
+## 3. Performance Testing Plan & Remote Monitoring Methodology
 
-### Why Remote Administration Is Needed
+### 3.1 Testing Objectives
 
-Remote administration allows administrators to manage servers without physical access, which is the standard practice in professional environments.
+The performance testing methodology aims to:
 
-**Advantages:**
-- Faster system management and troubleshooting  
-- Reduced downtime  
-- Real-world server administration experience using SSH  
+- Establish baseline system behaviour  
+- Detect abnormal resource usage  
+- Measure system stability  
+- Support later stress testing and optimisation  
 
-**Potential Risks:**
-- Unauthorized login attempts  
-- Brute-force password attacks  
-- Increased network exposure  
+### 3.2 Remote Monitoring Approach
 
-These risks require strict operating system level security controls.
+All monitoring is performed remotely over SSH.
+
+| Category | Tools |
+|--------|------|
+CPU Monitoring | `top`, `htop`, `ps` |
+Memory Monitoring | `free`, `vmstat` |
+Disk & I/O | `df`, `iostat` |
+Process Analysis | `ps aux` |
+Uptime & Load | `uptime`, `/proc/loadavg` |
+
+Baseline values are recorded during idle operation for comparison in later phases.
 
 ---
 
-## 4. SSH Service Verification
+## 4. Security Configuration Checklist
 
-The SSH service was verified using:
+| Security Area | Implementation |
+|--------------|---------------|
+SSH Hardening | SSH enabled and verified |
+Firewall | Planned for later phase (UFW) |
+Mandatory Access Control | Planned using AppArmor |
+Automatic Updates | Ubuntu unattended upgrades enabled |
+User Privilege Management | `vboxuser`, `analyst`, `auditor` roles |
+File Permissions | Enforced using `chmod` |
+File Ownership | Enforced using `chown` |
+Network Security | NAT networking used |
+Unauthorized Access Control | Permission restrictions tested |
+
+---
+
+## 5. Threat Model & Mitigation Strategy
+
+| Threat | Risk | Mitigation |
+|------|------|-----------|
+Brute Force SSH | Unauthorized login | Strong authentication, firewall (planned) |
+Privilege Escalation | Abuse of admin rights | Limited sudo privileges |
+Unauthorized Data Access | Data exposure | Strict permissions & ownership |
+
+---
+
+## 6. SSH Service Verification
+
+Command used:
 
 - `sudo systemctl status ssh`
-
-This confirmed that the SSH daemon is active and ready for secure remote connections.
 
 ![SSH Service Running](../Screenshots/Week2/Week2_1_directory_created.png)
 
 ---
 
-## 5. Network Configuration Verification
+## 7. Network Configuration Verification
 
-The network interface and IP address were verified using:
+Command used:
 
 - `ip a`
-
-This confirmed that the network interface was active, assigned an IP address, and ready for remote access.
 
 ![Network Interface & IP](../Screenshots/Week2/Week2_2_ssh_satatus.png)
 
 ---
 
-## 6. File Permission Configuration
+## 8. File Permission Configuration
 
-A test file was created and restricted:
+Commands used:
 
-- `touch permissions.txt`
+- `touch permissions.txt`  
 - `chmod 700 permissions.txt`
-
-This ensures only the owner has access, enforcing the **principle of least privilege**.
 
 ![File Permissions Applied](../Screenshots/Week2/Week2_3_network_ip.png)
 
 ---
 
-## 7. File Ownership Enforcement
+## 9. File Ownership Enforcement
 
-Ownership of files was verified and corrected:
+Commands used:
 
-- `touch ownership.txt`
+- `touch ownership.txt`  
 - `sudo chown vboxuser:vboxuser ownership.txt`
-
-This ensures proper access control by the operating system.
 
 ![Ownership Applied](../Screenshots/Week2/Week2_4_permissions.png)
 
 ---
 
-## 8. User & Privilege Management
+## 10. User & Privilege Management
 
-Additional user accounts were created to simulate role separation:
+Commands used:
 
-- `sudo adduser analyst`
+- `sudo adduser analyst`  
 - `sudo adduser auditor`
 
 ![Users Created](../Screenshots/Week2/Week2_5_ownership.png)
 
-The analyst account was granted administrative privileges:
+Grant admin privileges:
 
-- `sudo usermod -aG sudo analyst`
+- `sudo usermod -aG sudo analyst`  
 - `groups analyst`
 
 ![Group Assignment](../Screenshots/Week2/Week2_6_uptime.png)
 
 ---
 
-## 9. Confidential File Protection
+## 11. Confidential File Protection
 
-A confidential file was created and protected:
+Commands used:
 
-- `touch secret.txt`
-- `sudo chown analyst:analyst secret.txt`
+- `touch secret.txt`  
+- `sudo chown analyst:analyst secret.txt`  
 - `sudo chmod 600 secret.txt`
 
-This ensures only the analyst can read or modify the file.
-
 ![Secret File Restricted](../Screenshots/Week2/Week2_7_users_created.png)
-
-File permissions were confirmed:
 
 ![Secret Permissions](../Screenshots/Week2/Week2_8_user_list.png)
 
 ---
 
-## 10. Unauthorized Access Attempt
+## 12. Unauthorized Access Attempt
 
-The auditor user attempted access:
+Commands used:
 
-- `su auditor`
+- `su auditor`  
 - `cat secret.txt`
-
-The operating system correctly denied access.
 
 ![Unauthorized Attempt](../Screenshots/Week2/Week2_9_sudo_group.png)
 
@@ -145,37 +160,34 @@ The operating system correctly denied access.
 
 ---
 
-## 11. Authorized Access Confirmation
+## 13. Authorized Access Confirmation
 
-The analyst account successfully accessed the protected file:
+Commands used:
 
-- `su analyst`
+- `su analyst`  
 - `cat secret.txt`
 
 ![Authorized Access](../Screenshots/Week2/Week2_11_permission_denied.png)
 
 ---
 
-## 12. Security Evaluation Summary
+## 14. Security Evaluation Summary
 
-| Security Area | Result |
-|--------------|--------|
-| SSH Service | Secure & Active |
-| Network Configuration | Verified & Stable |
-| File Permissions | Enforced |
-| File Ownership | Correctly Assigned |
-| User Privilege Separation | Successfully Implemented |
-| Unauthorized Access | Blocked |
-| Authorized Access | Permitted |
+| Area | Status |
+|-----|------|
+Remote Access | Secure |
+User Privileges | Enforced |
+File Permissions | Enforced |
+File Ownership | Enforced |
+Unauthorized Access | Blocked |
+Security Baseline | Established |
 
 ---
 
-## 13. Reflection
+## 15. Reflection
 
-This week demonstrated how operating system security is enforced through concrete technical controls rather than theoretical policy.  
-By combining SSH verification, strict file permissions, ownership enforcement, and user privilege separation, the system now operates with a strong security posture suitable for professional server environments.
-
-This foundation enables the implementation of firewall rules, intrusion detection, and performance monitoring in later weeks.
+This week established a strong security baseline and testing framework by combining practical enforcement with structured planning.  
+The system is now prepared for firewall deployment, intrusion detection, and performance evaluation in later phases.
 
 ---
 
