@@ -162,13 +162,6 @@ During hardening, SSH continuity was tested to ensure firewall rules did not blo
 A connectivity issue was detected (“connection refused”), which indicated that SSH access was being blocked or the service was not available.  
 This was resolved by confirming the SSH service status and ensuring the firewall rule allowing port 22 (SSH) was applied correctly.
 
-### Screenshot: SSH Service Status (Fix Verification)
-
-![SSH Service Status](../Screenshots/Week4/12A_week4_ssh_service_status.png)
-
-### Screenshot: Firewall Rule Fix (SSH Allowed)
-
-![UFW SSH Fix](../Screenshots/Week4/12B_week4_ufw_ssh_fix.png)
 
 ### Screenshot: SSH Verified (Successful Connection)
 
