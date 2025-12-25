@@ -52,7 +52,7 @@ The SSH service was verified using:
 
 This confirmed that the SSH daemon is active and ready for secure remote connections.
 
-![SSH Service Running](../Screenshots/Week2/Week2_1.png)
+![SSH Service Running](../Screenshots/Week2/Week2_1_directory_created.png)
 
 ---
 
@@ -64,7 +64,7 @@ The network interface and IP address were verified using:
 
 This confirmed that the network interface was active, assigned an IP address, and ready for remote access.
 
-![Network Interface & IP](../Screenshots/Week2/Week2_2.png)
+![Network Interface & IP](../Screenshots/Week2/Week2_2_ssh_satatus.png)
 
 ---
 
@@ -77,7 +77,7 @@ A test file was created and restricted:
 
 This ensures only the owner has access, enforcing the **principle of least privilege**.
 
-![File Permissions Applied](../Screenshots/Week2/Week2_3.png)
+![File Permissions Applied](../Screenshots/Week2/Week2_3_network_ip.png)
 
 ---
 
@@ -90,7 +90,7 @@ Ownership of files was verified and corrected:
 
 This ensures proper access control by the operating system.
 
-![Ownership Applied](../Screenshots/Week2/Week2_4.png)
+![Ownership Applied](../Screenshots/Week2/Week2_4_permissions.png)
 
 ---
 
@@ -101,14 +101,14 @@ Additional user accounts were created to simulate role separation:
 - `sudo adduser analyst`
 - `sudo adduser auditor`
 
-![Users Created](../Screenshots/Week2/Week2_5.png)
+![Users Created](../Screenshots/Week2/Week2_5_ownership.png)
 
 The analyst account was granted administrative privileges:
 
 - `sudo usermod -aG sudo analyst`
 - `groups analyst`
 
-![Group Assignment](../Screenshots/Week2/Week2_6.png)
+![Group Assignment](../Screenshots/Week2/Week2_6_uptime.png)
 
 ---
 
@@ -122,11 +122,11 @@ A confidential file was created and protected:
 
 This ensures only the analyst can read or modify the file.
 
-![Secret File Restricted](../Screenshots/Week2/Week2_7.png)
+![Secret File Restricted](../Screenshots/Week2/Week2_7_users_created.png)
 
 File permissions were confirmed:
 
-![Secret Permissions](../Screenshots/Week2/Week2_8.png)
+![Secret Permissions](../Screenshots/Week2/Week2_8_user_list.png)
 
 ---
 
@@ -139,9 +139,9 @@ The auditor user attempted access:
 
 The operating system correctly denied access.
 
-![Unauthorized Attempt](../Screenshots/Week2/Week2_9.png)
+![Unauthorized Attempt](../Screenshots/Week2/Week2_9_sudo_group.png)
 
-![Permission Denied](../Screenshots/Week2/Week2_10.png)
+![Permission Denied](../Screenshots/Week2/Week2_10_file_restriction.png)
 
 ---
 
@@ -152,7 +152,7 @@ The analyst account successfully accessed the protected file:
 - `su analyst`
 - `cat secret.txt`
 
-![Authorized Access](../Screenshots/Week2/Week2_11.png)
+![Authorized Access](../Screenshots/Week2/Week2_11_permission_denied.png)
 
 ---
 
