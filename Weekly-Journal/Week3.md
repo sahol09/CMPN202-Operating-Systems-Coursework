@@ -44,7 +44,7 @@ The `ps aux` command was used to display a comprehensive list of running process
 
 ### Screenshot: Process List Output
 
-![Process List](../Screenshots/Week3/1_week3_ps_aux.png)
+![Process List](/Screenshots/Week3/1_week3_ps_aux.png)
 
 This output provides a baseline snapshot of system activity and resource distribution.
 
@@ -58,7 +58,7 @@ The `top` utility provides a continuously updating overview of CPU usage, memory
 
 ### Screenshot: `top` Output
 
-![Top Monitoring](../Screenshots/Week3/2_week3_top.png)
+![Top Monitoring](/Screenshots/Week3/2_week3_top.png)
 
 The display confirms that CPU usage remains low during idle operation and memory usage is stable.
 
@@ -72,7 +72,7 @@ The display confirms that CPU usage remains low during idle operation and memory
 
 ### Screenshot: `htop` Interface
 
-![Htop Monitoring](../Screenshots/Week3/3_week3_htop.png)
+![Htop Monitoring](/Screenshots/Week3/3_week3_htop.png)
 
 This interface allows faster identification of system activity and performance trends.
 
@@ -84,7 +84,7 @@ The commands `free -h` and `df -h` were executed to evaluate RAM allocation, swa
 
 ### Screenshot: Memory & Disk
 
-![Memory & Disk](../Screenshots/Week3/4_week3_free_df.png)
+![Memory & Disk](/Screenshots/Week3/4_week3_free_df.png)
 
 This confirms the system has sufficient memory and storage resources for stable operation.
 
@@ -96,7 +96,7 @@ System uptime and load averages were analysed to assess long-term stability and 
 
 ### Screenshot: Uptime & Load
 
-![Uptime & Load](../Screenshots/Week3/5_week3_uptime_load.png)
+![Uptime & Load](/Screenshots/Week3/5_week3_uptime_load.png)
 
 These values confirm the system is operating efficiently with minimal workload pressure.
 
@@ -108,7 +108,7 @@ The command `vmstat 1 5` was used to inspect context switching, paging behaviour
 
 ### Screenshot: Virtual Memory & Scheduling
 
-![VMStat](../Screenshots/Week3/6_week3_vmstat.png)
+![VMStat](/Screenshots/Week3/6_week3_vmstat.png)
 
 This provides deeper insight into kernel-level scheduling and memory management behaviour.
 
@@ -120,7 +120,7 @@ The `iostat` command was used to evaluate disk throughput, latency, and device u
 
 ### Screenshot: Disk I/O Statistics
 
-![IOStat](../Screenshots/Week3/7_week3_iostat.png)
+![IOStat](/Screenshots/Week3/7_week3_iostat.png)
 
 This confirms efficient disk performance and absence of I/O bottlenecks.
 
@@ -132,7 +132,7 @@ System and hardware characteristics were recorded using `uname -a`, `lscpu`, and
 
 ### Screenshot: Kernel & Hardware Information
 
-![Kernel & Hardware](../Screenshots/Week3/8_week3_kernel_hardware.png)
+![Kernel & Hardware](/Screenshots/Week3/8_week3_kernel_hardware.png)
 
 This establishes the environment in which all performance measurements were observed.
 
@@ -145,7 +145,7 @@ Linux scheduling policies and priorities were analysed using
 
 ### Screenshot: Scheduling Policies
 
-![Scheduling](../Screenshots/Week3/9_week3_process_scheduling.png)
+![Scheduling](/Screenshots/Week3/9_week3_process_scheduling.png)
 
 This confirms balanced scheduling and appropriate priority assignment by the kernel.
 
