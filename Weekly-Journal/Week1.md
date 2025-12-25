@@ -2,74 +2,64 @@
 
 ---
 
-## Introduction
+## 1. Introduction
 
-This week focused on designing and planning the operating system environment required for the Operating Systems coursework.  
-The objective was to create a **stable, secure, and realistic Linux-based virtual server environment** that supports later coursework activities such as remote administration, security hardening, monitoring, and performance evaluation.
+Week 1 focused on planning and preparing the operating system environment for the Operating Systems coursework.  
+The goal was to build a **stable, secure, CLI-only Ubuntu Server** inside **Oracle VirtualBox**, ready for later weeks that require **remote administration via SSH**, security hardening, monitoring, and performance evaluation.
 
-A **virtualised architecture** was selected to allow safe experimentation without impacting the host system while reflecting professional real-world server deployment practices.
-
----
-
-## System Architecture Overview
-
-The planned system consists of two primary components:
-
-- **Ubuntu Server (CLI-based)**  
-  Acts as the main server responsible for system configuration, security implementation, monitoring, and performance testing.  
-  All administrative tasks are performed remotely using **SSH**.
-
-- **Workstation (Host System)**  
-  Used to remotely connect to and manage the server through Secure Shell (SSH).
-
-This design enforces command-line proficiency and mirrors modern enterprise server administration, where servers are managed remotely rather than locally.
+A virtualised approach was selected to allow controlled testing and iteration without affecting the host system while still reflecting real-world server deployment practices.
 
 ---
 
-## System Planning Flow
+## 2. System Architecture Overview
+
+The planned environment consists of two main components:
+
+- **Ubuntu Server (Headless / CLI-based)**  
+  A minimal server installation used for configuration, security implementation, monitoring, and performance testing.
+
+- **Workstation (Host machine)**  
+  Used to administer the server remotely using **SSH**, reflecting professional server administration practice.
+
+This design ensures all tasks are performed using command-line tools and remote access, aligning with the coursework constraints.
+
+---
+
+## 3. Planning Flow
 
 The following structured planning process was followed:
 
-1. Analyse coursework requirements  
-2. Select virtualisation platform (Oracle VirtualBox)  
-3. Choose an appropriate Linux server distribution  
-4. Configure a minimal server installation (CLI only)  
-5. Design secure network connectivity  
-6. Verify system readiness using command-line tools  
-
-This systematic approach ensures the environment is prepared for future security, monitoring, and performance tasks.
+1. Review coursework requirements and constraints  
+2. Select a virtualisation platform (Oracle VirtualBox)  
+3. Choose a suitable Linux server distribution  
+4. Configure a minimal CLI-only server installation  
+5. Select and document network configuration  
+6. Verify baseline server readiness using CLI system checks  
 
 ---
 
-## Distribution Selection Justification
+## 4. Distribution Selection Justification
 
-### Selected Distribution: **Ubuntu Server 24.04 LTS**
+### Selected Distribution: Ubuntu Server 24.04 LTS
 
-Ubuntu Server 24.04 LTS was chosen based on the following advantages:
+Ubuntu Server 24.04 LTS was selected due to:
 
-- **Long-Term Support (LTS)**  
-  Provides long-term stability and security updates essential for server environments.
-
-- **Extensive documentation and community support**  
-  Enables efficient troubleshooting and learning in both academic and professional contexts.
-
-- **Wide package availability**  
-  Supports easy installation of required services such as SSH, firewall utilities, monitoring tools, and security scanners.
-
-- **Strong VirtualBox compatibility**  
-  Ensures reliable performance within a virtualised environment without additional configuration complexity.
+- **Long-Term Support (LTS)** for stability and predictable updates
+- Strong documentation and community support for troubleshooting
+- Wide package availability for SSH, firewall tooling, monitoring, and security auditing
+- Reliable performance and compatibility within VirtualBox
 
 ---
 
-## Virtual Machine Creation
+## 5. Virtual Machine Creation (Oracle VirtualBox)
+
+The Ubuntu Server VM was created in Oracle VirtualBox with a practical configuration suitable for later security and performance testing.
 
 ![Virtual Machine Created](../Screenshots/Week1/1_vm_created.png)
 
-This screenshot confirms the successful creation of the Ubuntu Server virtual machine in Oracle VirtualBox with the allocated CPU, memory, and storage resources.
-
 ---
 
-## Distribution Comparison Table
+## 6. Distribution Comparison Table
 
 | Distribution | Stability | Documentation | VirtualBox Support | Decision |
 |------------|-----------|---------------|-------------------|---------|
@@ -78,97 +68,87 @@ This screenshot confirms the successful creation of the Ubuntu Server virtual ma
 | Fedora Server | Medium | Moderate | Good | Not chosen |
 | CentOS Stream | High | Limited | Moderate | Not chosen |
 
-Ubuntu Server was selected due to its optimal balance between stability, usability, and suitability for academic and real-world server deployments.
+Ubuntu was selected due to the best overall balance between stability, usability, and suitability for both coursework and industry practice.
 
 ---
 
-## Virtual Machine Configuration
+## 7. Virtual Machine Configuration
 
 | Component | Configuration |
 |---------|---------------|
 | Operating System | Ubuntu Server 24.04 LTS |
-| Memory | 5 GB |
+| Memory | ~5 GB |
 | CPU | 2 vCPUs |
-| Storage | 93 GB |
-| Interface | Command Line (No GUI) |
+| Storage | ~93–94 GB |
+| Interface | CLI-only (No GUI) |
+| Network | NAT |
 
-### Headless Server Design Decision
+### Headless Design Decision
 
-A minimal, headless server installation was intentionally chosen to:
-
-- Reduce system resource usage  
-- Minimise the attack surface  
-- Improve security and performance  
-
-This configuration follows professional server best practices.
+A headless (CLI-only) server was chosen to:
+- Reduce resource usage
+- Minimise attack surface
+- Improve operational realism for remote server administration
 
 ---
 
-## Network Configuration Planning
+## 8. Network Configuration Planning
 
-The server was configured using **NAT networking**.
-
-This design was selected because it:
-
-- Allows internet access for system updates  
-- Provides a secure default configuration  
-- Reduces direct exposure of the server to external networks  
-
-### Network Design Trade-off
-
-Although NAT limits direct inbound access, this is acceptable for this coursework because server management is performed via SSH from the workstation and security is prioritised over public accessibility.
+The VM was configured using **NAT networking**, providing:
+- Internet access for updates and package installation
+- A secure default boundary between the VM and external networks
+- Controlled inbound exposure (useful for a security-focused coursework environment)
 
 ---
 
-## Initial System Verification
+## 9. Initial System Verification (CLI Evidence)
 
-Initial verification was performed to ensure the server was operational and ready for remote administration.
+Baseline verification was performed to confirm the server was operational and correctly configured for later tasks.
 
-Key checks included:
+The following command-line checks were used:
+- Kernel and OS validation
+- Memory status verification
+- Disk allocation verification
+- Network interface and IPv4 address identification
 
-- Confirming kernel and OS version  
-- Verifying memory and disk allocation  
-- Checking active network interfaces and assigned IP address  
+![System Verification Commands](../Screenshots/Week1/2_server_system_info.png)
 
-![System Information](../Screenshots/Week1/2_server_system_info.png)
+![System Information Evidence](../Screenshots/Week1/3_server_ssh_status.png)
 
----
-
-## SSH Service Verification
-
-![SSH Service Status](../Screenshots/Week1/3_server_ssh_status.png)
-
-This screenshot confirms that the SSH service is **active and running**, enabling secure remote administration without reliance on the VirtualBox console.
+![System & Network Evidence](../Screenshots/Week1/4_server_SSH_port.png)
 
 ---
 
-## SSH Network Port Verification
+## 10. SSH Service Verification
 
-![SSH Port](../Screenshots/Week1/4_server_SSH_port.png)
+SSH was confirmed to be installed, enabled, and running so that administration can be performed remotely (as required for later weeks).
 
-This screenshot confirms that the SSH service is listening on the correct network port, validating readiness for secure remote connectivity.
+- Service status confirmed using `systemctl status ssh`
+- Port listening confirmed using `ss -tlnp | grep ssh`
+
+This validates that secure remote access is available and that the server is ready for Week 4+ hardening.
 
 ---
 
-## Week 1 Requirement Checklist
+## 11. Week 1 Requirement Checklist
 
 | Requirement | Status |
 |------------|--------|
 | System architecture planning | ✅ Completed |
 | Distribution selection and justification | ✅ Completed |
 | Virtualisation platform selection | ✅ Completed |
+| VM creation and configuration evidence | ✅ Completed |
 | Network configuration planning | ✅ Completed |
-| Initial system verification | ✅ Completed |
-| Supporting evidence prepared | ✅ Completed |
+| Baseline CLI verification evidence | ✅ Completed |
+| SSH readiness verified | ✅ Completed |
 
 ---
 
-## Reflection
+## 12. Reflection
 
-This week demonstrated that strong system planning is essential before technical implementation.  
-Early design decisions regarding operating system choice, architecture, and network configuration directly affect long-term security, performance, and maintainability.
+Week 1 established a secure and realistic foundation for the coursework by ensuring a minimal headless Ubuntu Server environment was deployed successfully and verified using CLI system checks.
 
-Building a minimal Ubuntu Server environment reinforced core Linux administration principles and established a robust foundation for the advanced security, monitoring, and performance evaluation tasks in subsequent weeks.
+These early design decisions (distribution, architecture, network configuration, and SSH readiness) provide a stable base for future weeks that require stronger security controls, monitoring automation, and performance testing.
 
 ---
 
