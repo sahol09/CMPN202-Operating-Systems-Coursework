@@ -36,10 +36,10 @@ Before applying advanced security controls, existing users and groups are listed
 ### Evidence
 
 - **Existing Users:**  
-  ![Existing Users](./Screenshots/Week5/1_week5_existing_users.png)
+  ![Existing Users](../Screenshots/Week5/1_week5_existing_users.png)
 
 - **Existing Groups:**  
-  ![Existing Groups](./Screenshots/Week5/2_week5_existing_groups.png)
+  ![Existing Groups](../Screenshots/Week5/2_week5_existing_groups.png)
 
 ---
 
@@ -50,16 +50,16 @@ A controlled permission model is created using a test user and a dedicated acces
 ### Evidence
 
 - **User created:**  
-  ![User Created](./Screenshots/Week5/3_week5_user_created.png)
+  ![User Created](../Screenshots/Week5/3_week5_user_created.png)
 
 - **Group created:**  
-  ![Group Created](./Screenshots/Week5/4_week5_group_created.png)
+  ![Group Created](../Screenshots/Week5/4_week5_group_created.png)
 
 - **User added to group:**  
-  ![User Added](./Screenshots/Week5/5_week5_user_added_to_group.png)
+  ![User Added](../Screenshots/Week5/5_week5_user_added_to_group.png)
 
 - **Membership verified:**  
-  ![Group Verified](./Screenshots/Week5/6_week5_user_group_verify.png)
+  ![Group Verified](../Screenshots/Week5/6_week5_user_group_verify.png)
 
 ---
 
@@ -74,13 +74,13 @@ A protected directory is created with:
 ### Evidence
 
 - **Secure directory configured:**  
-  ![Secure Directory](./Screenshots/Week5/7_week5_secure_directory.png)
+  ![Secure Directory](../Screenshots/Week5/7_week5_secure_directory.png)
 
 - **Authorised access success:**  
-  ![Access Allowed](./Screenshots/Week5/8_week5_secure_access_success.png)
+  ![Access Allowed](../Screenshots/Week5/8_week5_secure_access_success.png)
 
 - **Unauthorised access denied:**  
-  ![Access Denied](./Screenshots/Week5/9_week5_permission_denied.png)
+  ![Access Denied](../Screenshots/Week5/9_week5_permission_denied.png)
 
 ---
 
@@ -91,7 +91,7 @@ Temporary accounts, groups, and directories are removed to restore the baseline 
 ### Evidence
 
 - **Cleanup completed:**  
-  ![Cleanup](./Screenshots/Week5/10_week5_cleanup.png)
+  ![Cleanup](../Screenshots/Week5/10_week5_cleanup.png)
 
 ---
 
@@ -102,10 +102,10 @@ AppArmor enforces policy-based restrictions on processes.
 ### Evidence
 
 - **AppArmor status:**  
-  ![AppArmor Status](./Screenshots/Week5/11_week5_apparmor_status.png)
+  ![AppArmor Status](../Screenshots/Week5/11_week5_apparmor_status.png)
 
 - **AppArmor enabled:**  
-  ![AppArmor Enabled](./Screenshots/Week5/12_week5_apparmor_enabled.png)
+  ![AppArmor Enabled](../Screenshots/Week5/12_week5_apparmor_enabled.png)
 
 ---
 
@@ -114,10 +114,10 @@ AppArmor enforces policy-based restrictions on processes.
 ### Evidence
 
 - **unattended-upgrades status:**  
-  ![Auto Updates](./Screenshots/Week5/13_week5_unattended_upgrades_status.png)
+  ![Auto Updates](../Screenshots/Week5/13_week5_unattended_upgrades_status.png)
 
 - **Configuration:**  
-  ![Auto Config](./Screenshots/Week5/14_week5_auto_upgrades_config.png)
+  ![Auto Config](../Screenshots/Week5/14_week5_auto_upgrades_config.png)
 
 ---
 
@@ -126,10 +126,10 @@ AppArmor enforces policy-based restrictions on processes.
 ### Evidence
 
 - **fail2ban status:**  
-  ![fail2ban Status](./Screenshots/Week5/15_week5_fail2ban_status.png)
+  ![fail2ban Status](../Screenshots/Week5/15_week5_fail2ban_status.png)
 
 - **SSH protection active:**  
-  ![fail2ban SSH](./Screenshots/Week5/16_week5_fail2ban_sshd.png)
+  ![fail2ban SSH](../Screenshots/Week5/16_week5_fail2ban_sshd.png)
 
 ---
 
@@ -138,16 +138,16 @@ AppArmor enforces policy-based restrictions on processes.
 ### Evidence
 
 - **Script created:**  
-  ![Script Created](./Screenshots/Week5/17_week5_baseline_script_created.png)
+  ![Script Created](../Screenshots/Week5/17_week5_baseline_script_created.png)
 
 - **Script executed:**  
-  ![Script Output](./Screenshots/Week5/18_week5_baseline_script.png)
+  ![Script Output](../Screenshots/Week5/18_week5_baseline_script.png)
 
 - **Report saved:**  
-  ![Saved Report](./Screenshots/Week5/19_week5_baseline_script_run_and_saved.png)
+  ![Saved Report](../Screenshots/Week5/19_week5_baseline_script_run_and_saved.png)
 
 - **Report preview:**  
-  ![Report Preview](./Screenshots/Week5/20_week5_baseline_report_output.png)
+  ![Report Preview](../Screenshots/Week5/20_week5_baseline_report_output.png)
 
 ---
 
@@ -156,16 +156,16 @@ AppArmor enforces policy-based restrictions on processes.
 ### Evidence
 
 - **Logs & status:**  
-  ![Logs](./Screenshots/Week5/21_week5_ssh_status_and_logs.png)
+  ![Logs](../Screenshots/Week5/21_week5_ssh_status_and_logs.png)
 
 - **Controls status:**  
-  ![Controls 1](./Screenshots/Week5/22_week5_controls_status_1.png)
+  ![Controls 1](../Screenshots/Week5/22_week5_controls_status_1.png)
 
 - **Controls status:**  
-  ![Controls 2](./Screenshots/Week5/23_week5_controls_status_2.png)
+  ![Controls 2](../Screenshots/Week5/23_week5_controls_status_2.png)
 
 - **Monitor report preview:**  
-  ![Monitor Preview](./Screenshots/Week5/24_week5_monitor_report_preview.png)
+  ![Monitor Preview](../Screenshots/Week5/24_week5_monitor_report_preview.png)
 
 ---
 
