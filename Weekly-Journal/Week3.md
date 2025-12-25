@@ -4,8 +4,8 @@
 
 ## 1. Introduction
 
-Week 3 focused on evaluating the performance of the Linux server through real-time monitoring and process analysis.  
-Rather than configuring new services, the goal was to understand how the operating system behaves under normal conditions and how system resources such as CPU and memory are utilised.
+Week 3 focused on evaluating the performance of the Linux server through real-time monitoring and detailed resource analysis.  
+Rather than configuring new services, the objective was to understand how the operating system behaves under normal conditions and how system resources such as CPU, memory, and storage are utilised.
 
 Performance testing is essential for detecting bottlenecks, ensuring stability, and preparing the system for future optimisation and security hardening.
 
@@ -16,10 +16,11 @@ Performance testing is essential for detecting bottlenecks, ensuring stability, 
 The objectives of Week 3 were:
 
 - Monitor real-time system performance  
-- Understand CPU and memory utilisation  
+- Analyse CPU scheduling and memory behaviour  
 - Observe running processes and background services  
-- Analyse overall system behaviour and stability  
-- Prepare the environment for future tuning and optimisation tasks  
+- Examine disk utilisation and I/O activity  
+- Evaluate overall system stability  
+- Establish baseline performance metrics  
 
 ---
 
@@ -27,11 +28,11 @@ The objectives of Week 3 were:
 
 System monitoring allows administrators to answer critical operational questions:
 
-- Is the system under heavy load?
-- Which processes are consuming the most resources?
-- Is the server operating within safe limits?
+- Is the system under heavy load?  
+- Which processes are consuming the most resources?  
+- Is the server operating within safe limits?  
 
-Linux provides several built-in monitoring tools that allow administrators to evaluate system health without installing additional software.
+Linux provides powerful built-in tools that enable detailed performance analysis without additional software.
 
 ---
 
@@ -39,13 +40,13 @@ Linux provides several built-in monitoring tools that allow administrators to ev
 
 ### Purpose
 
-The `ps aux` command was used to display a detailed list of running processes along with their CPU and memory usage.
+The `ps aux` command was used to display a comprehensive list of running processes along with CPU usage, memory consumption, ownership, and execution states.
 
 ### Screenshot: Process List Output
 
 ![Process List](../Screenshots/Week3/1_week3_ps_aux.png)
 
-This output shows active system services and user processes and how resources are distributed across the system.
+This output provides a baseline snapshot of system activity and resource distribution.
 
 ---
 
@@ -53,7 +54,7 @@ This output shows active system services and user processes and how resources ar
 
 ### Purpose
 
-The `top` command provides a continuously updating overview of system performance, including CPU usage, memory consumption, load average, and process states.
+The `top` utility provides a continuously updating overview of CPU usage, memory consumption, load average, and process scheduling behaviour.
 
 ### Screenshot: `top` Output
 
@@ -67,65 +68,116 @@ The display confirms that CPU usage remains low during idle operation and memory
 
 ### Purpose
 
-`htop` was used as an advanced monitoring tool to provide improved visibility and usability.
+`htop` was used as an advanced monitoring tool offering improved visibility, colour-coded metrics, and interactive process control.
 
 ### Screenshot: `htop` Interface
 
 ![Htop Monitoring](../Screenshots/Week3/3_week3_htop.png)
 
-This interface allows faster identification of system activity and resource distribution.
+This interface allows faster identification of system activity and performance trends.
 
 ---
 
 ## 7. Memory & Disk Usage Analysis
 
-Memory and storage were analysed to ensure sufficient available resources.
+The commands `free -h` and `df -h` were executed to evaluate RAM allocation, swap usage, and disk space consumption.
 
 ### Screenshot: Memory & Disk
 
 ![Memory & Disk](../Screenshots/Week3/4_week3_free_df.png)
 
-This confirms the system has adequate memory and disk capacity for stable operation.
+This confirms the system has sufficient memory and storage resources for stable operation.
 
 ---
 
 ## 8. System Uptime & Load Evaluation
 
-The system’s uptime and load averages were examined to assess long-term stability.
+System uptime and load averages were analysed to assess long-term stability and CPU workload trends.
 
 ### Screenshot: Uptime & Load
 
 ![Uptime & Load](../Screenshots/Week3/5_week3_uptime_load.png)
 
-These values confirm the system is operating efficiently with low workload pressure.
+These values confirm the system is operating efficiently with minimal workload pressure.
 
 ---
 
-## 9. Performance Summary
+## 9. Virtual Memory & CPU Scheduling Analysis
+
+The command `vmstat 1 5` was used to inspect context switching, paging behaviour, I/O wait time, and CPU idle activity.
+
+### Screenshot: Virtual Memory & Scheduling
+
+![VMStat](../Screenshots/Week3/6_week3_vmstat.png)
+
+This provides deeper insight into kernel-level scheduling and memory management behaviour.
+
+---
+
+## 10. Disk I/O Performance Analysis
+
+The `iostat` command was used to evaluate disk throughput, latency, and device utilisation.
+
+### Screenshot: Disk I/O Statistics
+
+![IOStat](../Screenshots/Week3/7_week3_iostat.png)
+
+This confirms efficient disk performance and absence of I/O bottlenecks.
+
+---
+
+## 11. Kernel & Hardware Context
+
+System and hardware characteristics were recorded using `uname -a`, `lscpu`, and `lsmem` to link OS behaviour with physical resources.
+
+### Screenshot: Kernel & Hardware Information
+
+![Kernel & Hardware](../Screenshots/Week3/8_week3_kernel_hardware.png)
+
+This establishes the environment in which all performance measurements were observed.
+
+---
+
+## 12. Process Scheduling Policy Inspection
+
+Linux scheduling policies and priorities were analysed using  
+`ps -eo pid,ppid,cmd,pri,ni,cls,stat`.
+
+### Screenshot: Scheduling Policies
+
+![Scheduling](../Screenshots/Week3/9_week3_process_scheduling.png)
+
+This confirms balanced scheduling and appropriate priority assignment by the kernel.
+
+---
+
+## 13. Performance Summary
 
 | Resource | Observation |
 |---------|------------|
-| CPU | Low utilisation during idle state |
+| CPU | Low utilisation during idle operation |
 | Memory | Stable usage with sufficient free RAM |
 | Disk | Adequate available storage |
+| Disk I/O | Efficient throughput with no detected bottlenecks |
 | Load Average | Low, indicating healthy system |
-| Overall Stability | Maintained during testing |
+| Overall Stability | Maintained throughout testing |
 
 ---
 
-## 10. Key Learning Outcomes
+## 14. Key Learning Outcomes
 
-- Improved understanding of performance metrics  
-- Ability to monitor live system behaviour  
-- Identification of resource-heavy processes  
-- Evaluation of system stability and readiness  
+- Improved understanding of Linux performance metrics  
+- Ability to monitor and interpret live system behaviour  
+- Identification of resource-intensive processes  
+- Analysis of CPU scheduling and memory management  
+- Evaluation of overall system health and stability  
 
 ---
 
-## 11. Reflection
+## 15. Reflection
 
-Week 3 demonstrated that continuous performance monitoring is essential for maintaining system health and preventing degradation.  
-These tools provide administrators with the insight required to plan capacity, detect issues early, and prepare systems for increased workloads.
+This week demonstrated the importance of continuous performance monitoring in maintaining a stable and reliable operating environment.  
+The collected metrics provide a strong baseline for future optimisation, security hardening, and capacity planning.
 
 ---
 
